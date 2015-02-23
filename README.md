@@ -20,6 +20,8 @@ Phaser.io Modals creator script
 	<li><strong>fontSize</strong> | The font size of the text or bitmaptext (bitmapText or text)</li>
 	<li><strong>align</strong> | The alignment of the text (center, left, right and text only)</li>
 	<li><strong>offsetX</strong> | The offset on x-axis of the element from the center of the game (0 is dead center)</li>	<li><strong>offsetY</strong> | The offset on y-axis of the element from the center of the game (0 is dead center)</li>	<li><strong>contentScale</strong> | The scaling to apply to the element (1 is no scale, default = 1)</li>
+	<li><strong>stroke</strong> | The stroke color to apply to the text (default = 0x000000)</li>
+	<li><strong>strokeThickness</strong> | The stroke thickness to apply to the text (default = 0)</li>
 	<li><strong>content</strong> | The actual content of the element can be string, number, cache key (for images), url of image</li>
 	<li><strong>callback</strong> | The callback function to call when the element is clicked/touched (basically when input down event is fired)</li>
 </ul>

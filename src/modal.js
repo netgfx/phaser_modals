@@ -72,7 +72,8 @@ gameModal = function (game) {
                 var itemColor = item.color || 0x000000;
                 var itemFontfamily = item.fontFamily || 'Arial';
                 var itemFontSize = item.fontSize || 32;
-                var itemStroke = item.stroke || '';
+                var itemStroke = item.stroke || '0x000000';
+                var itemStrokeThickness = item.strokeThickness || 0;
                 var itemAlign = item.align || 'center';
                 var offsetX = item.offsetX || 0;
                 var offsetY = item.offsetY || 0;
@@ -90,6 +91,8 @@ gameModal = function (game) {
                         modalLabel = game.add.text(0, 0, content, {
                             font: itemFontSize + 'px ' + itemFontfamily,
                             fill: "#" + String(itemColor).replace("0x",""),
+                            stroke: "#" + String(itemStroke).replace("0x",""),
+                            strokeThickness: itemStrokeThickness,
                             align: itemAlign
                         });
                         modalLabel.contentType = 'text';
