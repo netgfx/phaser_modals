@@ -51,6 +51,7 @@ gameModal = function (game) {
                     innerModal.width = game.width;
                     innerModal.height = game.height;
                     innerModal.type = type;
+                    innerModal.input.priorityID = 1;
                     innerModal.events.onInputDown.add(function(e){
                         window.console.log(this, e.type);
                         this.hideModal(e.type);
