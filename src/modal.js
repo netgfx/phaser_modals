@@ -53,10 +53,22 @@ gameModal = function (game) {
                     innerModal.type = type;
                     innerModal.input.priorityID = 1;
                     innerModal.events.onInputDown.add(function(e){
-                        window.console.log(this, e.type);
                         this.hideModal(e.type);
                     }, _this);
 
+                    modalGroup.add(innerModal);
+                }
+                else {
+                    var innerModal = game.add.sprite(0, 0);
+                    innerModal.inputEnabled = true;
+                    innerModal.width = game.width;
+                    innerModal.height = game.height;
+                    innerModal.type = type;
+                    innerModal.input.priorityID = 1;
+                    innerModal.input.priorityID = 1;
+                    innerModal.events.onInputDown.add(function(e){
+                        //
+                    }, _this);
                     modalGroup.add(innerModal);
                 }
             }
