@@ -36,3 +36,6 @@ Phaser.io Modals creator script
 	<li><strong>destroyModal</strong> | Remove a previously created modal from the registry</li>
 	<li><strong>updateModalValue</strong> | Dynamically change the value of an element inside a modal, takes the modal name/type, the changed value, and the index of the element as arguments (experimental function)</li>
 </ul>
+
+<hr>
+To view an example and tutorial visit my blog post: http://nightlycoding.com/index.php/2015/02/phaser-io-modal-creator/
