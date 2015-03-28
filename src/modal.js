@@ -35,41 +35,42 @@ gameModal = function (game) {
 
             var modal;
             var modalGroup = game.add.group();
-            modalGroup.inputEnabled = true;
 
             if (includeBackground === true) {
                 modal = game.add.graphics(game.width, game.height);
                 modal.beginFill(backgroundColor, backgroundOpacity);
                 modal.x = 0;
                 modal.y = 0;
-                modal.inputEnabled = true;
+
                 modal.drawRect(0, 0, game.width, game.height);
 
                 if(modalCloseOnInput === true) {
+
                     var innerModal = game.add.sprite(0, 0);
                     innerModal.inputEnabled = true;
                     innerModal.width = game.width;
                     innerModal.height = game.height;
                     innerModal.type = type;
-                    innerModal.input.priorityID = 1;
-                    innerModal.events.onInputDown.add(function(e){
+                    innerModal.input.priorityID = 0;
+                    innerModal.events.onInputDown.add(function(e, pointer){
+                        window.console.log(e, pointer);
                         this.hideModal(e.type);
-                    }, _this);
+                    }, _this, 2);
 
                     modalGroup.add(innerModal);
                 }
                 else {
-                    var innerModal = game.add.sprite(0, 0);
+                    //modal.inputEnabled = true;
+                    /*var innerModal = game.add.sprite(0, 0);
                     innerModal.inputEnabled = true;
                     innerModal.width = game.width;
                     innerModal.height = game.height;
                     innerModal.type = type;
-                    innerModal.input.priorityID = 1;
-                    innerModal.input.priorityID = 1;
+                    innerModal.input.priorityID = 2;
                     innerModal.events.onInputDown.add(function(e){
                         //
                     }, _this);
-                    modalGroup.add(innerModal);
+                    modalGroup.add(innerModal);*/
                 }
             }
 
@@ -132,12 +133,18 @@ gameModal = function (game) {
                 modalLabel.offsetX = offsetX;
                 modalLabel.offsetY = offsetY;
 
+
                 if (callback !== false) {
                     modalLabel.inputEnabled = true;
-                    modalLabel.events.onInputDown.add(callback, this);
+                    modalLabel.pixelPerfectClick = true;
+                    modalLabel.priorityID = 10;
+                    modalLabel.events.onInputDown.add(callback, modalLabel);
                 }
 
+                modalLabel.bringToTop();
                 modalGroup.add(modalLabel);
+                modalLabel.bringToTop();
+                modalGroup.bringToTop(modalLabel);
             }
 
             modalGroup.visible = false;
