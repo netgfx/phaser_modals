@@ -141,7 +141,7 @@ gameModal = function (game) {
                     modalLabel.events.onInputDown.add(callback, modalLabel);
                 }
 
-                if(type !== "bitmapText"){
+                if(itemType !== "bitmapText"){
                     modalLabel.bringToTop();
                     modalGroup.add(modalLabel);
                     modalLabel.bringToTop();
