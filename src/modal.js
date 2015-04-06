@@ -141,10 +141,16 @@ gameModal = function (game) {
                     modalLabel.events.onInputDown.add(callback, modalLabel);
                 }
 
-                modalLabel.bringToTop();
-                modalGroup.add(modalLabel);
-                modalLabel.bringToTop();
-                modalGroup.bringToTop(modalLabel);
+                if(type !== "bitmapText"){
+                    modalLabel.bringToTop();
+                    modalGroup.add(modalLabel);
+                    modalLabel.bringToTop();
+                    modalGroup.bringToTop(modalLabel);
+                }
+                else {
+                    modalGroup.add(modalLabel);
+                    modalGroup.bringToTop(modalLabel);
+                }
             }
 
             modalGroup.visible = false;
