@@ -12,7 +12,7 @@ gameModal = function (game) {
      * @param  {[type]} type [description]
      * @return {[type]}      [description]
      */
-    this.hideModal = function(type) {
+    this.hideModal = function (type) {
         window.console.log(type);
         game.modals[type].visible = false;
     };
@@ -44,7 +44,7 @@ gameModal = function (game) {
 
                 modal.drawRect(0, 0, game.width, game.height);
 
-                if(modalCloseOnInput === true) {
+                if (modalCloseOnInput === true) {
 
                     var innerModal = game.add.sprite(0, 0);
                     innerModal.inputEnabled = true;
@@ -52,14 +52,13 @@ gameModal = function (game) {
                     innerModal.height = game.height;
                     innerModal.type = type;
                     innerModal.input.priorityID = 0;
-                    innerModal.events.onInputDown.add(function(e, pointer){
+                    innerModal.events.onInputDown.add(function (e, pointer) {
                         window.console.log(e, pointer);
                         this.hideModal(e.type);
                     }, _this, 2);
 
                     modalGroup.add(innerModal);
-                }
-                else {
+                } else {
                     //modal.inputEnabled = true;
                     /*var innerModal = game.add.sprite(0, 0);
                     innerModal.inputEnabled = true;
@@ -75,7 +74,7 @@ gameModal = function (game) {
             }
 
             // add the bg
-            if(includeBackground) {
+            if (includeBackground) {
                 modalGroup.add(modal);
             }
 
@@ -96,6 +95,7 @@ gameModal = function (game) {
                 var centerX = game.width / 2;
                 var centerY = game.height / 2;
                 var callback = item.callback || false;
+                var textAlign = item.textAlign || "left";
 
                 modalLabel = null;
 
@@ -104,8 +104,8 @@ gameModal = function (game) {
                     if (itemType === "text") {
                         modalLabel = game.add.text(0, 0, content, {
                             font: itemFontSize + 'px ' + itemFontfamily,
-                            fill: "#" + String(itemColor).replace("0x",""),
-                            stroke: "#" + String(itemStroke).replace("0x",""),
+                            fill: "#" + String(itemColor).replace("0x", ""),
+                            stroke: "#" + String(itemStroke).replace("0x", ""),
                             strokeThickness: itemStrokeThickness,
                             align: itemAlign
                         });
@@ -116,6 +116,7 @@ gameModal = function (game) {
                     } else {
                         modalLabel = game.add.bitmapText(0, 0, itemFontfamily, String(content), itemFontSize);
                         modalLabel.contentType = 'bitmapText';
+                        modalLabel.align = textAlign;
                         modalLabel.updateText();
                         modalLabel.x = (centerX - (modalLabel.width / 2)) + offsetX;
                         modalLabel.y = (centerY - (modalLabel.height / 2)) + offsetY;
@@ -141,13 +142,12 @@ gameModal = function (game) {
                     modalLabel.events.onInputDown.add(callback, modalLabel);
                 }
 
-                if(itemType !== "bitmapText"){
+                if (itemType !== "bitmapText") {
                     modalLabel.bringToTop();
                     modalGroup.add(modalLabel);
                     modalLabel.bringToTop();
                     modalGroup.bringToTop(modalLabel);
-                }
-                else {
+                } else {
                     modalGroup.add(modalLabel);
                     modalGroup.bringToTop(modalLabel);
                 }
@@ -157,33 +157,30 @@ gameModal = function (game) {
             game.modals[type] = modalGroup;
 
         },
-        updateModalValue: function(value, type, index, id) {
+        updateModalValue: function (value, type, index, id) {
             var item;
-            if(index !== undefined && index !== null) {
+            if (index !== undefined && index !== null) {
                 item = game.modals[type].getChildAt(index);
-            }
-            else if(id !== undefined && id !== null) {
+            } else if (id !== undefined && id !== null) {
 
             }
 
-            if(item.contentType === "text") {
+            if (item.contentType === "text") {
                 item.text = value;
                 item.update();
                 item.x = ((game.width / 2) - (item.width / 2)) + item.offsetX;
                 item.y = ((game.height / 2) - (item.height / 2)) + item.offsetY;
-            }
-            else if(item.contentType === "bitmapText") {
+            } else if (item.contentType === "bitmapText") {
                 item.text = value;
                 item.updateText();
                 item.x = ((game.width / 2) - (item.width / 2)) + item.offsetX;
                 item.y = ((game.height / 2) - (item.height / 2)) + item.offsetY;
-            }
-            else if(item.contentType === "image") {
+            } else if (item.contentType === "image") {
                 item.loadTexture(value);
             }
 
         },
-        getModalItem: function(type, index) {
+        getModalItem: function (type, index) {
             return game.modals[type].getChildAt(index);
         },
         showModal: function (type) {
