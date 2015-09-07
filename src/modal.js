@@ -26,6 +26,7 @@ gameModal = function (game) {
             var backgroundColor = options.backgroundColor || "0x000000";
             var backgroundOpacity = options.backgroundOpacity || 0.7;
             var modalCloseOnInput = options.modalCloseOnInput || false;
+            var modalBackgroundCallback = options.modalBackgroundCallback || false;
             var vCenter = options.vCenter || true;
             var hCenter = options.hCenter || true;
             var itemsArr = options.itemsArr || [];
@@ -53,12 +54,13 @@ gameModal = function (game) {
                     innerModal.type = type;
                     innerModal.input.priorityID = 0;
                     innerModal.events.onInputDown.add(function (e, pointer) {
-                        window.console.log(e, pointer);
                         this.hideModal(e.type);
                     }, _this, 2);
 
                     modalGroup.add(innerModal);
                 } else {
+
+                    modalBackgroundCallback = true;
                     //modal.inputEnabled = true;
                     /*var innerModal = game.add.sprite(0, 0);
                     innerModal.inputEnabled = true;
@@ -73,10 +75,23 @@ gameModal = function (game) {
                 }
             }
 
+            if (modalBackgroundCallback) {
+                var innerModal = game.add.sprite(0, 0);
+                innerModal.inputEnabled = true;
+                innerModal.width = game.width;
+                innerModal.height = game.height;
+                innerModal.type = type;
+                innerModal.input.priorityID = 0;
+
+                modalGroup.add(innerModal);
+            }
+
             // add the bg
             if (includeBackground) {
                 modalGroup.add(modal);
             }
+
+
 
             var modalLabel;
             for (var i = 0; i < itemsArr.length; i += 1) {
