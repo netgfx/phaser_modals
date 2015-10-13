@@ -30,12 +30,18 @@ gameModal = function (game) {
             var vCenter = options.vCenter || true;
             var hCenter = options.hCenter || true;
             var itemsArr = options.itemsArr || [];
+            var fixedToCamera = options.fixedToCamera || false;
             /*var vPadding = options.vPadding || 20;*/
 
             /////////////////////////////////////////////////////////////////////
 
             var modal;
             var modalGroup = game.add.group();
+            if (fixedToCamera === true) {
+                modalGroup.fixedToCamera = true;
+                modalGroup.cameraOffset.x = 0;
+                modalGroup.cameraOffset.y = 0;
+            }
 
             if (includeBackground === true) {
                 modal = game.add.graphics(game.width, game.height);
