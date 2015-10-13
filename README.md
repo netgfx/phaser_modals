@@ -24,6 +24,7 @@ Phaser.io Modals creator script
 	<li><strong>strokeThickness</strong> | The stroke thickness to apply to the text (default = 0)</li>
 	<li><strong>content</strong> | The actual content of the element can be string, number, cache key (for images), url of image</li>
 	<li><strong>callback</strong> | The callback function to call when the element is clicked/touched (basically when input down event is fired)</li>
+	<li><strong>fixedToCamera</strong> | Whether or not the modal is fixed to camera (default = false)</li>
 </ul>
 
 <strong>Available functions</strong>
