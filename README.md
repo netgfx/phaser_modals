@@ -25,6 +25,9 @@ Phaser.io Modals creator script
 	<li><strong>content</strong> | The actual content of the element can be string, number, cache key (for images), url of image</li>
 	<li><strong>callback</strong> | The callback function to call when the element is clicked/touched (basically when input down event is fired)</li>
 	<li><strong>fixedToCamera</strong> | Whether or not the modal is fixed to camera (default = false)</li>
+	<li><strong>atlasParent</strong> | When adding a sprite or button from an atlasHash/Array (default = "")</li>
+	<li><strong>buttonHover</strong> | Key for the button state  hover (default = content)</li>
+	<li><strong>buttonActive</strong> | Key for the button state active (default = content)</li>
 </ul>
 
 <strong>Available functions</strong>

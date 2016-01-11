@@ -117,6 +117,9 @@ gameModal = function (game) {
                 var centerY = game.height / 2;
                 var callback = item.callback || false;
                 var textAlign = item.textAlign || "left";
+                var atlasParent = item.atlasParent || "";
+                var buttonHover = item.buttonHover || content;
+                var buttonActive = item.buttonActive || content;
 
                 modalLabel = null;
 
@@ -148,6 +151,20 @@ gameModal = function (game) {
                     modalLabel = game.add.image(0, 0, content);
                     modalLabel.scale.setTo(contentScale, contentScale);
                     modalLabel.contentType = 'image';
+                    modalLabel.x = (centerX - ((modalLabel.width) / 2)) + offsetX;
+                    modalLabel.y = (centerY - ((modalLabel.height) / 2)) + offsetY;
+                }
+                else if (itemType === "sprite") {
+                    modalLabel = game.add.sprite(0, 0, atlasParent, content);
+                    modalLabel.scale.setTo(contentScale, contentScale);
+                    modalLabel.contentType = 'sprite';
+                    modalLabel.x = (centerX - ((modalLabel.width) / 2)) + offsetX;
+                    modalLabel.y = (centerY - ((modalLabel.height) / 2)) + offsetY;
+                }
+                else if(itemType === "button") {
+                    modalLabel = game.add.button(0, 0, atlasParent, callback, this, buttonHover, content, buttonActive, content);
+                    modalLabel.scale.setTo(contentScale, contentScale);
+                    modalLabel.contentType = 'button';
                     modalLabel.x = (centerX - ((modalLabel.width) / 2)) + offsetX;
                     modalLabel.y = (centerY - ((modalLabel.height) / 2)) + offsetY;
                 }
@@ -219,117 +236,3 @@ gameModal = function (game) {
         }
     };
 };
-
-
-/**
- * [createModal description]
- * @param  {[type]} type [description]
- * @return {[type]}      [description]
- */
-function createModal(type, fn) {
-
-    var modalGroup = game.add.group();
-    modalGroup.inputEnabled = true;
-
-    var modal = game.add.graphics(game.width, game.height);
-    modal.beginFill("0xffffff", 0.7);
-    modal.x = 0;
-    modal.y = 0;
-    modal.inputEnabled = true;
-    modal.drawRect(0, 0, game.width, game.height);
-
-    //var modalPanel = game.add.image((game.width / 2 - (550 / 2)), (game.height / 2 - (400 / 2)), "modal");
-
-    if (type === "game-over") {
-
-        var gameLabel = game.add.image(game.width / 2 - ((358 * 0.6) / 2), (game.height / 2) - 250, 'gameover');
-        gameLabel.scale.setTo(0.6, 0.6);
-        var gameLabel1 = game.add.image(game.width / 2 - ((533 * 0.6) / 2), game.height / 2, 'tryagain');
-        gameLabel1.scale.setTo(0.6, 0.6);
-        var yesLabel = game.add.image(game.width / 2 - 200, game.height / 2 + 150, 'yes');
-        var noLabel = game.add.image(game.width / 2 + 80, game.height / 2 + 150, 'no');
-
-        yesLabel.scale.setTo(0.8, 0.8);
-        noLabel.scale.setTo(0.8, 0.8);
-
-        // -----------
-
-        yesLabel.inputEnabled = true;
-        yesLabel.events.onInputDown.add(function () {
-            game.state.start('Game');
-        }, this);
-
-        noLabel.inputEnabled = true;
-        noLabel.events.onInputDown.add(function () {
-            game.state.start('MainMenu');
-        }, this);
-
-        modalGroup.add(modal);
-        modalGroup.add(gameLabel);
-        modalGroup.add(gameLabel1);
-        modalGroup.add(yesLabel);
-        modalGroup.add(noLabel);
-
-    } else if (type === "level") {
-
-        var modalText = game.add.bitmapText(0, 0, 'font', "Starting \nNext Level", 52);
-
-        modalText.inputEnabled = true;
-        modalText.updateText();
-        modalText.x = game.width / 2 - (modalText.width / 2);
-        modalText.y = game.height / 2 - (modalText.height / 2) - 200;
-
-        // ------------
-
-        var countDownText = game.add.bitmapText(0, 0, 'font', "3", 38);
-
-        //countDownText.inputEnabled = true;
-        countDownText.updateText();
-        countDownText.x = game.width / 2 - (countDownText.width / 2);
-        countDownText.y = game.height / 2 - (countDownText.height / 2) - 100;
-
-        reg.countDownText = countDownText;
-
-        modal.destroy();
-        //modalGroup.add(modal);
-        modalGroup.add(modalText);
-        modalGroup.add(countDownText);
-
-    } else if (type === "info") {
-
-        // -----------
-        var modalText = game.add.bitmapText(0, 0, 'font', "Click/TAP the signs \nin the correct order", 32);
-
-        modalText.inputEnabled = true;
-        modalText.updateText();
-        modalText.x = game.width / 2 - (modalText.width / 2);
-        modalText.y = game.height / 2 - (modalText.height / 2);
-
-        var closeX = game.add.bitmapText(0, 0, 'font', 'Got it!', 40);
-        closeX.inputEnabled = true;
-        closeX.updateText();
-        closeX.x = game.width / 2 - (closeX.width / 2);
-        closeX.y = game.height - 300;
-
-
-        closeX.events.onInputDown.add(function () {
-            fn();
-            hideModal('info');
-        }, game);
-
-        modalGroup.add(modal);
-        modalGroup.add(closeX);
-        //modalGroup.add(modalPanel);
-        //modalGroup.add(modalHeader);
-        //modalGroup.add(gameLabel2);
-        modalGroup.add(modalText);
-    }
-
-    modalGroup.visible = false;
-
-    reg.modal[type] = modalGroup;
-
-    if (type === "info") {
-        showModal(type);
-    }
-}
