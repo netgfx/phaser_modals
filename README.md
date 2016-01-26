@@ -43,3 +43,7 @@ Phaser.io Modals creator script
 
 <hr>
 To view an example and tutorial visit my blog post: http://nightlycoding.com/index.php/2015/02/phaser-io-modal-creator/
+
+Note: Currently there is a bug on Phaser with WebGL using the last texture used if an empty sprite is created, in order to fix this you can add: ``` innerModal.texture.baseTexture.skipRender = false; ``` 
+Issue: https://github.com/photonstorm/phaser/issues/2176
+Thanks for this info @cemadil
