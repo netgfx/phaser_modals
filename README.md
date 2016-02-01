@@ -14,7 +14,7 @@ Phaser.io Modals creator script
 <strong>Modal elements properties</strong>
 
 <ul>
-	<li><strong>type</strong> | The type of the element (text, bitmapText, image)</li>
+	<li><strong>type</strong> | The type of the element (text, bitmapText, image, button, graphics)</li>
 	<li><strong>color</strong> | The color of the element (text only)</li>
 	<li><strong>fontFamily</strong> | The font family to use (bitmapText or text)</li>
 	<li><strong>fontSize</strong> | The font size of the text or bitmaptext (bitmapText or text)</li>
@@ -28,6 +28,10 @@ Phaser.io Modals creator script
 	<li><strong>atlasParent</strong> | When adding a sprite or button from an atlasHash/Array (default = "")</li>
 	<li><strong>buttonHover</strong> | Key for the button state  hover (default = content)</li>
 	<li><strong>buttonActive</strong> | Key for the button state active (default = content)</li>
+	<li><strong>graphicColor</strong> | Graphic color (default = 0xffffff)</li>
+	<li><strong>graphicOpacity</strong> | Graphic opacity (default = 1)</li>
+	<li><strong>graphicW</strong> | Graphic width (default = 200)</li>
+	<li><strong>graphicH</strong> | Graphic height (default = 200)</li>
 </ul>
 
 <strong>Available functions</strong>
