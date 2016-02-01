@@ -44,26 +44,47 @@ GameState.prototype.create = function() {
 
 // The update() method is called every frame
 GameState.prototype.update = function() {
-   
+
 };
 
 function createModals() {
+  // reg.modal.createModal({
+  //           type:"modal1",
+  //           includeBackground: true,
+  //           modalCloseOnInput: true,
+  //           itemsArr: [
+  //               {
+  //                   type: "text",
+  //                   content: "Simple Text with Modal background, \n nothing fancy here...",
+  //                   fontFamily: "Luckiest Guy",
+  //                   fontSize: 42,
+  //                   color: "0xFEFF49",
+  //                   offsetY: -50
+  //               }
+  //           ]
+  //       });
   reg.modal.createModal({
             type:"modal1",
             includeBackground: true,
             modalCloseOnInput: true,
             itemsArr: [
                 {
+                    type: "graphics",
+                    graphicColor: "0xffffff",
+                    graphicWidth: 300,
+                    graphicHeight: 600
+                },
+                {
                     type: "text",
-                    content: "Simple Text with Modal background, \n nothing fancy here...",
+                    content: "The white behind me\nis a [Phaser.Graphic]",
                     fontFamily: "Luckiest Guy",
-                    fontSize: 42,
-                    color: "0xFEFF49",
+                    fontSize: 22,
+                    color: "0x1e1e1e",
                     offsetY: -50
-                }
+                },
             ]
         });
-  
+
   //////// modal 2 ////////////
   reg.modal.createModal({
             type:"modal2",
@@ -211,11 +232,11 @@ function createModals() {
                       reg.modal.hideModal("modal5");
                     }
             }
-                
+
             ]
    });
   ////// modal 6 //////////
-  
+
   reg.modal.createModal({
             type: "modal6",
             includeBackground: true,
@@ -259,7 +280,7 @@ function showModal6() {
   reg.modal.showModal("modal6");
   countDown(updateCountdown, function () {
        reg.modal.hideModal("modal6");
-               
+
   });
 }
 

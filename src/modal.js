@@ -120,6 +120,10 @@ gameModal = function (game) {
                 var atlasParent = item.atlasParent || "";
                 var buttonHover = item.buttonHover || content;
                 var buttonActive = item.buttonActive || content;
+                var graphicColor = item.graphicColor || 0xffffff;
+                var graphicOpacity = item.graphicOpacity || 1;
+                var graphicW = item.graphicWidth || 200;
+                var graphicH = item.graphicHeight || 200;
 
                 modalLabel = null;
 
@@ -168,6 +172,15 @@ gameModal = function (game) {
                     modalLabel.x = (centerX - ((modalLabel.width) / 2)) + offsetX;
                     modalLabel.y = (centerY - ((modalLabel.height) / 2)) + offsetY;
                 }
+                else if(itemType === "graphics") {
+                    modalLabel = game.add.graphics(graphicW, graphicH);
+                    modalLabel.beginFill(graphicColor, graphicOpacity);
+
+                    modalLabel.drawRect(0, 0, graphicW, graphicH);
+                    modalLabel.endFill();
+                    modalLabel.x = (centerX - ((modalLabel.width) / 2)) + offsetX;
+                    modalLabel.y = (centerY - ((modalLabel.height) / 2)) + offsetY;
+                }
 
                 modalLabel.offsetX = offsetX;
                 modalLabel.offsetY = offsetY;
@@ -180,7 +193,7 @@ gameModal = function (game) {
                     modalLabel.events.onInputDown.add(callback, modalLabel);
                 }
 
-                if (itemType !== "bitmapText") {
+                if (itemType !== "bitmapText" && itemType !== "graphics") {
                     modalLabel.bringToTop();
                     modalGroup.add(modalLabel);
                     modalLabel.bringToTop();
