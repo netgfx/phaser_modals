@@ -124,6 +124,7 @@ gameModal = function (game) {
                 var graphicOpacity = item.graphicOpacity || 1;
                 var graphicW = item.graphicWidth || 200;
                 var graphicH = item.graphicHeight || 200;
+                var lockPosition = item.lockPosition || false;
 
                 modalLabel = null;
 
@@ -184,6 +185,7 @@ gameModal = function (game) {
 
                 modalLabel["_offsetX"] = 0;
                 modalLabel["_offsetY"] = 0;
+                modalLabel["lockPosition"] = lockPosition;
                 modalLabel._offsetX = offsetX;
                 modalLabel._offsetY = offsetY;
 
@@ -221,13 +223,23 @@ gameModal = function (game) {
             if (item.contentType === "text") {
                 item.text = value;
                 item.update();
-                item.x = ((game.width / 2) - (item.width / 2)) + item._offsetX;
-                item.y = ((game.height / 2) - (item.height / 2)) + item._offsetY;
+                if (item.lockPosition === true){
+
+                }
+                else {
+                    item.x = ((game.width / 2) - (item.width / 2)) + item._offsetX;
+                    item.y = ((game.height / 2) - (item.height / 2)) + item._offsetY;
+                }
             } else if (item.contentType === "bitmapText") {
                 item.text = value;
                 item.updateText();
-                item.x = ((game.width / 2) - (item.width / 2)) + item._offsetX;
-                item.y = ((game.height / 2) - (item.height / 2)) + item._offsetY;
+                if(item.lockPosition === true) {
+
+                }
+                else {
+                    item.x = ((game.width / 2) - (item.width / 2)) + item._offsetX;
+                    item.y = ((game.height / 2) - (item.height / 2)) + item._offsetY;
+                }
             } else if (item.contentType === "image") {
                 item.loadTexture(value);
             }
