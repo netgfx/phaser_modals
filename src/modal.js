@@ -182,8 +182,10 @@ gameModal = function (game) {
                     modalLabel.y = (centerY - ((modalLabel.height) / 2)) + offsetY;
                 }
 
-                modalLabel.offsetX = offsetX;
-                modalLabel.offsetY = offsetY;
+                modalLabel["_offsetX"] = 0;
+                modalLabel["_offsetY"] = 0;
+                modalLabel._offsetX = offsetX;
+                modalLabel._offsetY = offsetY;
 
 
                 if (callback !== false) {
@@ -219,13 +221,13 @@ gameModal = function (game) {
             if (item.contentType === "text") {
                 item.text = value;
                 item.update();
-                item.x = ((game.width / 2) - (item.width / 2)) + item.offsetX;
-                item.y = ((game.height / 2) - (item.height / 2)) + item.offsetY;
+                item.x = ((game.width / 2) - (item.width / 2)) + item._offsetX;
+                item.y = ((game.height / 2) - (item.height / 2)) + item._offsetY;
             } else if (item.contentType === "bitmapText") {
                 item.text = value;
                 item.updateText();
-                item.x = ((game.width / 2) - (item.width / 2)) + item.offsetX;
-                item.y = ((game.height / 2) - (item.height / 2)) + item.offsetY;
+                item.x = ((game.width / 2) - (item.width / 2)) + item._offsetX;
+                item.y = ((game.height / 2) - (item.height / 2)) + item._offsetY;
             } else if (item.contentType === "image") {
                 item.loadTexture(value);
             }
