@@ -190,7 +190,7 @@ gameModal = function (game) {
                 modalLabel._offsetY = offsetY;
 
 
-                if (callback !== false) {
+                if (callback !== false && itemType !== "button") {
                     modalLabel.inputEnabled = true;
                     modalLabel.pixelPerfectClick = true;
                     modalLabel.priorityID = 10;
