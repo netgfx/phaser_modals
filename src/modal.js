@@ -31,9 +31,6 @@ gameModal = function (game) {
             var hCenter = options.hCenter || true;
             var itemsArr = options.itemsArr || [];
             var fixedToCamera = options.fixedToCamera || false;
-            /*var vPadding = options.vPadding || 20;*/
-
-            /////////////////////////////////////////////////////////////////////
 
             var modal;
             var modalGroup = game.add.group();
@@ -67,17 +64,6 @@ gameModal = function (game) {
                 } else {
 
                     modalBackgroundCallback = true;
-                    //modal.inputEnabled = true;
-                    /*var innerModal = game.add.sprite(0, 0);
-                    innerModal.inputEnabled = true;
-                    innerModal.width = game.width;
-                    innerModal.height = game.height;
-                    innerModal.type = type;
-                    innerModal.input.priorityID = 2;
-                    innerModal.events.onInputDown.add(function(e){
-                        //
-                    }, _this);
-                    modalGroup.add(innerModal);*/
                 }
             }
 
@@ -92,12 +78,9 @@ gameModal = function (game) {
                 modalGroup.add(innerModal);
             }
 
-            // add the bg
             if (includeBackground) {
                 modalGroup.add(modal);
             }
-
-
 
             var modalLabel;
             for (var i = 0; i < itemsArr.length; i += 1) {
@@ -124,6 +107,7 @@ gameModal = function (game) {
                 var graphicOpacity = item.graphicOpacity || 1;
                 var graphicW = item.graphicWidth || 200;
                 var graphicH = item.graphicHeight || 200;
+                var graphicRadius = item.graphicRadius || 0;
                 var lockPosition = item.lockPosition || false;
 
                 modalLabel = null;
@@ -152,32 +136,34 @@ gameModal = function (game) {
                     }
 
                 } else if (itemType === "image") {
-                    //content = item.imageKey || "";
                     modalLabel = game.add.image(0, 0, content);
                     modalLabel.scale.setTo(contentScale, contentScale);
                     modalLabel.contentType = 'image';
                     modalLabel.x = (centerX - ((modalLabel.width) / 2)) + offsetX;
                     modalLabel.y = (centerY - ((modalLabel.height) / 2)) + offsetY;
-                }
-                else if (itemType === "sprite") {
+
+                } else if (itemType === "sprite") {
                     modalLabel = game.add.sprite(0, 0, atlasParent, content);
                     modalLabel.scale.setTo(contentScale, contentScale);
                     modalLabel.contentType = 'sprite';
                     modalLabel.x = (centerX - ((modalLabel.width) / 2)) + offsetX;
                     modalLabel.y = (centerY - ((modalLabel.height) / 2)) + offsetY;
-                }
-                else if(itemType === "button") {
+
+                } else if (itemType === "button") {
                     modalLabel = game.add.button(0, 0, atlasParent, callback, this, buttonHover, content, buttonActive, content);
                     modalLabel.scale.setTo(contentScale, contentScale);
                     modalLabel.contentType = 'button';
                     modalLabel.x = (centerX - ((modalLabel.width) / 2)) + offsetX;
                     modalLabel.y = (centerY - ((modalLabel.height) / 2)) + offsetY;
-                }
-                else if(itemType === "graphics") {
+
+                } else if (itemType === "graphics") {
                     modalLabel = game.add.graphics(graphicW, graphicH);
                     modalLabel.beginFill(graphicColor, graphicOpacity);
-
-                    modalLabel.drawRect(0, 0, graphicW, graphicH);
+                    if (graphicRadius <= 0) {
+                        modalLabel.drawRect(0, 0, graphicW, graphicH);
+                    } else {
+                        modalLabel.drawRoundedRect(0, 0, graphicW, graphicH, graphicRadius);
+                    }
                     modalLabel.endFill();
                     modalLabel.x = (centerX - ((modalLabel.width) / 2)) + offsetX;
                     modalLabel.y = (centerY - ((modalLabel.height) / 2)) + offsetY;
@@ -223,20 +209,18 @@ gameModal = function (game) {
             if (item.contentType === "text") {
                 item.text = value;
                 item.update();
-                if (item.lockPosition === true){
+                if (item.lockPosition === true) {
 
-                }
-                else {
+                } else {
                     item.x = ((game.width / 2) - (item.width / 2)) + item._offsetX;
                     item.y = ((game.height / 2) - (item.height / 2)) + item._offsetY;
                 }
             } else if (item.contentType === "bitmapText") {
                 item.text = value;
                 item.updateText();
-                if(item.lockPosition === true) {
+                if (item.lockPosition === true) {
 
-                }
-                else {
+                } else {
                     item.x = ((game.width / 2) - (item.width / 2)) + item._offsetX;
                     item.y = ((game.height / 2) - (item.height / 2)) + item._offsetY;
                 }
