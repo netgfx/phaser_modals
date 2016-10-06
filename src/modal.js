@@ -107,6 +107,7 @@ gameModal = function (game) {
                 var graphicOpacity = item.graphicOpacity || 1;
                 var graphicW = item.graphicWidth || 200;
                 var graphicH = item.graphicHeight || 200;
+                var graphicRadius = item.graphicRadius || 0;
                 var lockPosition = item.lockPosition || false;
 
                 modalLabel = null;
@@ -140,23 +141,29 @@ gameModal = function (game) {
                     modalLabel.contentType = 'image';
                     modalLabel.x = (centerX - ((modalLabel.width) / 2)) + offsetX;
                     modalLabel.y = (centerY - ((modalLabel.height) / 2)) + offsetY;
+
                 } else if (itemType === "sprite") {
                     modalLabel = game.add.sprite(0, 0, atlasParent, content);
                     modalLabel.scale.setTo(contentScale, contentScale);
                     modalLabel.contentType = 'sprite';
                     modalLabel.x = (centerX - ((modalLabel.width) / 2)) + offsetX;
                     modalLabel.y = (centerY - ((modalLabel.height) / 2)) + offsetY;
+
                 } else if (itemType === "button") {
                     modalLabel = game.add.button(0, 0, atlasParent, callback, this, buttonHover, content, buttonActive, content);
                     modalLabel.scale.setTo(contentScale, contentScale);
                     modalLabel.contentType = 'button';
                     modalLabel.x = (centerX - ((modalLabel.width) / 2)) + offsetX;
                     modalLabel.y = (centerY - ((modalLabel.height) / 2)) + offsetY;
+
                 } else if (itemType === "graphics") {
                     modalLabel = game.add.graphics(graphicW, graphicH);
                     modalLabel.beginFill(graphicColor, graphicOpacity);
-
-                    modalLabel.drawRect(0, 0, graphicW, graphicH);
+                    if (graphicRadius >= 0) {
+                        modalLabel.drawRect(0, 0, graphicW, graphicH);
+                    } else {
+                        modalLabel.drawRoundedRect(0, 0, graphicW, graphicH, graphicRadius);
+                    }
                     modalLabel.endFill();
                     modalLabel.x = (centerX - ((modalLabel.width) / 2)) + offsetX;
                     modalLabel.y = (centerY - ((modalLabel.height) / 2)) + offsetY;

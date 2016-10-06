@@ -32,6 +32,7 @@ Phaser.io Modals creator script
 	<li><strong>graphicOpacity</strong> | Graphic opacity (default = 1)</li>
 	<li><strong>graphicWidth</strong> | Graphic width (default = 200)</li>
 	<li><strong>graphicHeight</strong> | Graphic height (default = 200)</li>
+	<li><strong>graphicRadius</strong> | Graphic border radius (default = 0)</li>
 	<li><strong>lockPosition</strong> | locks the position after an update (default = false)</li>
 </ul>
 
