@@ -159,7 +159,7 @@ gameModal = function (game) {
                 } else if (itemType === "graphics") {
                     modalLabel = game.add.graphics(graphicW, graphicH);
                     modalLabel.beginFill(graphicColor, graphicOpacity);
-                    if (graphicRadius >= 0) {
+                    if (graphicRadius <= 0) {
                         modalLabel.drawRect(0, 0, graphicW, graphicH);
                     } else {
                         modalLabel.drawRoundedRect(0, 0, graphicW, graphicH, graphicRadius);
