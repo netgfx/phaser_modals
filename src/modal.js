@@ -110,6 +110,14 @@ gameModal = function (game) {
                 var graphicRadius = item.graphicRadius || 0;
                 var lockPosition = item.lockPosition || false;
 
+                var itemAnchor = item.anchor || {x:0,y:0};
+                var itemAngle = item.angle || 0;
+                var itemX = item.x || 0;
+        				var itemY = item.y || 0;
+                var imageFrame = item.frame || false;
+        				var tileSpriteWidth = item.tileSpriteWidth || game.width;
+        				var tileSpriteHeight = item.tileSpriteHeight || game.height;
+
                 modalLabel = null;
 
                 if (itemType === "text" || itemType === "bitmapText") {
@@ -141,14 +149,18 @@ gameModal = function (game) {
                     modalLabel.contentType = 'image';
                     modalLabel.x = (centerX - ((modalLabel.width) / 2)) + offsetX;
                     modalLabel.y = (centerY - ((modalLabel.height) / 2)) + offsetY;
-
+        				} else if (itemType === "tileSprite") {
+          					modalLabel = game.add.tileSprite(itemX, itemY, tileSpriteWidth, tileSpriteHeight, content, imageFrame);
+          					modalLabel.scale.setTo(contentScale, contentScale);
+                    modalLabel.anchor.setTo(itemAnchor.x, itemAnchor.y);
+                    modalLabel.angle = itemAngle;
+          					modalLabel.contentType = 'tileSprite';
                 } else if (itemType === "sprite") {
                     modalLabel = game.add.sprite(0, 0, atlasParent, content);
                     modalLabel.scale.setTo(contentScale, contentScale);
                     modalLabel.contentType = 'sprite';
                     modalLabel.x = (centerX - ((modalLabel.width) / 2)) + offsetX;
                     modalLabel.y = (centerY - ((modalLabel.height) / 2)) + offsetY;
-
                 } else if (itemType === "button") {
                     modalLabel = game.add.button(0, 0, atlasParent, callback, this, buttonHover, content, buttonActive, content);
                     modalLabel.scale.setTo(contentScale, contentScale);
