@@ -112,7 +112,7 @@ gameModal = function (game) {
 				var itemAngle = item.angle || 0;
 				var itemX = item.x || 0;
 				var itemY = item.y || 0;
-				var imageFrame = item.frame || false;
+				var imageFrame = item.frame || null;
 				var tileSpriteWidth = item.tileSpriteWidth || game.width;
 				var tileSpriteHeight = item.tileSpriteHeight || game.height;
 
