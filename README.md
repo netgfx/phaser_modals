@@ -6,7 +6,7 @@ Phaser.io Modals creator script
 <ul>
 	<li><strong>type:</strong> This is the name of the modal, which we use to identify it</li>
 	<li><strong>includeBackground:</strong> This toggles the modal background on or off (default off)</li>
-		<li><strong>backgroundColor:</strong> This is the modal background color (default 0x000000)</li>
+	<li><strong>backgroundColor:</strong> This is the modal background color (default 0x000000)</li>
 	<li><strong>backgroundOpacity: </strong> This sets the modal background opacity (default: 0.7)</li>
 	<li><strong>modalCloseOnInput:</strong> If we want the modal to close when we click on the background (default off)</li>
 </ul>
