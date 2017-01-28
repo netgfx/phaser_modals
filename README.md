@@ -6,7 +6,7 @@ Phaser.io Modals creator script
 <ul>
 	<li><strong>type:</strong> This is the name of the modal, which we use to identify it</li>
 	<li><strong>includeBackground:</strong> This toggles the modal background on or off (default off)</li>
-        <li><strong>backgroundColor:</strong> This is the modal background color (default 0x000000)</li>
+	<li><strong>backgroundColor:</strong> This is the modal background color (default 0x000000)</li>
 	<li><strong>backgroundOpacity: </strong> This sets the modal background opacity (default: 0.7)</li>
 	<li><strong>modalCloseOnInput:</strong> If we want the modal to close when we click on the background (default off)</li>
 </ul>
@@ -34,6 +34,14 @@ Phaser.io Modals creator script
 	<li><strong>graphicHeight</strong> | Graphic height (default = 200)</li>
 	<li><strong>graphicRadius</strong> | Graphic border radius (default = 0)</li>
 	<li><strong>lockPosition</strong> | locks the position after an update (default = false)</li>
+	<li><strong>tileSpriteWidth</strong> | The width of the TileSprite. (default = game.width)</li>
+	<li><strong>tileSpriteHeight</strong> | The height of the TileSprite (default = game.height)</li>
+	<li><strong>anchor</strong> | Anchor for element (default = {x:0,y:0})</li>
+	<li><strong>angle</strong> | The angle property is the rotation of the element (default = 0)</li>
+	<li><strong>x</strong> | The position of the element on the x axis (default = 0)</li>
+	<li><strong>y</strong> | The position of the element on the y axis (default = 0)</li>
+	<li><strong>frame</strong> | If this Sprite is using part of a sprite sheet or texture atlas you
+	    can specify the exact frame to use by giving a string or numeric index. </li>
 </ul>
 
 <strong>Available functions</strong>
