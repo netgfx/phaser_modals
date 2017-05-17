@@ -153,7 +153,7 @@ function createModals() {
             offsetX: -80,
             contentScale: 0.8,
             callback: function() {
-                window.open("http://www.facebook.com/sharer.php?u=Cool%20modals%20%40%20http%3A%2F%2Fcodepen.io%2Fnetgfx%2Fpen%2FbNLgaX")
+                window.open("http://www.facebook.com/sharer.php?u=Cool%20modals%20%40%20http%3A%2F%2Fcodepen.io%2Fnetgfx%2Fpen%2FbNLgaX");
             }
         }]
     });
@@ -257,11 +257,11 @@ function showModal6() {
 }
 
 function countDown(fn, endFn) {
-    var endFn = endFn || function() {};
+    var _endFn = endFn || function() {};
 
     var _timer = game.time.create(false);
     _timer.start();
-    _timer.onComplete.add(endFn);
+    _timer.onComplete.add(_endFn);
     _timer.repeat(Phaser.Timer.SECOND, 5, fn, this);
     window.console.log("adding timer", game);
 }
