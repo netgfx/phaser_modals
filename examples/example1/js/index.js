@@ -3,10 +3,10 @@
 // Copyright © 2015 Michael Dobekidis
 // Licensed under the terms of the MIT License
 var reg = {};
-var GameState = function (game) {};
+var GameState = function(game) {};
 
 // Load images and sounds
-GameState.prototype.preload = function () {
+GameState.prototype.preload = function() {
     this.load.image("bg", "http://i221.photobucket.com/albums/dd22/djmid71/Untitled-1_zpswmvh3qea.jpg");
     this.load.image("m1", "http://i221.photobucket.com/albums/dd22/djmid71/M1_zpsdprlkpno.png");
     this.load.image("m2", "http://i221.photobucket.com/albums/dd22/djmid71/M2_zpsefls9w86.png");
@@ -26,7 +26,7 @@ GameState.prototype.preload = function () {
 };
 
 // Setup the example
-GameState.prototype.create = function () {
+GameState.prototype.create = function() {
     // initiate the modal class
     reg.modal = new gameModal(game);
     createModals();
@@ -43,7 +43,7 @@ GameState.prototype.create = function () {
 };
 
 // The update() method is called every frame
-GameState.prototype.update = function () {
+GameState.prototype.update = function() {
 
 };
 
@@ -62,7 +62,7 @@ function createModals() {
             graphicRadius: 40
         }, {
             type: "text",
-            content: "The white behind me\nis a [Phaser.Graphic]",
+            content: "The white {behind} me\n{is} a {[Phaser.Graphic]}",
             fontFamily: "Luckiest Guy",
             fontSize: 22,
             color: "0x1e1e1e",
@@ -110,7 +110,7 @@ function createModals() {
             offsetY: 100,
             offsetX: -80,
             contentScale: 0.6,
-            callback: function () {
+            callback: function() {
                 alert("YES!");
             }
         }, {
@@ -119,7 +119,7 @@ function createModals() {
             offsetY: 100,
             offsetX: 80,
             contentScale: 0.6,
-            callback: function () {
+            callback: function() {
                 alert("NO!");
             }
         }]
@@ -143,7 +143,7 @@ function createModals() {
             offsetY: 20,
             offsetX: 80,
             contentScale: 0.8,
-            callback: function () {
+            callback: function() {
                 window.open("https://twitter.com/intent/tweet?text=Cool%20modals%20%40%20http%3A%2F%2Fcodepen.io%2Fnetgfx%2Fpen%2FbNLgaX", 'twitter');
             }
         }, {
@@ -152,7 +152,7 @@ function createModals() {
             offsetY: 20,
             offsetX: -80,
             contentScale: 0.8,
-            callback: function () {
+            callback: function() {
                 window.open("http://www.facebook.com/sharer.php?u=Cool%20modals%20%40%20http%3A%2F%2Fcodepen.io%2Fnetgfx%2Fpen%2FbNLgaX")
             }
         }]
@@ -198,7 +198,7 @@ function createModals() {
                 color: "0x000000",
                 offsetY: -130,
                 offsetX: 240,
-                callback: function () {
+                callback: function() {
                     reg.modal.hideModal("modal5");
                 }
             }
@@ -250,14 +250,14 @@ function showModal5() {
 
 function showModal6() {
     reg.modal.showModal("modal6");
-    countDown(updateCountdown, function () {
+    countDown(updateCountdown, function() {
         reg.modal.hideModal("modal6");
 
     });
 }
 
 function countDown(fn, endFn) {
-    var endFn = endFn || function () {};
+    var endFn = endFn || function() {};
 
     var _timer = game.time.create(false);
     _timer.start();
