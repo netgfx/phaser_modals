@@ -44,9 +44,9 @@ Phaser.io Modals creator script
 	    can specify the exact frame to use by giving a string or numeric index. </li>
 	<li>To make part of text <strong>BOLD</strong> include it like this: 
 	
-	```
+	<code>
 		content: "The white {behind} me\n{is} a {[Phaser.Graphic]}"
-	```
+	</code>
 	
 	(Add text that you want bold into <strong>{}</strong> )</li>
 </ul>
