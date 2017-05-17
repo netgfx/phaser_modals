@@ -150,7 +150,6 @@ gameModal = function(game) {
                         });
                         modalLabel.contentType = 'text';
                         modalLabel.update();
-                        window.console.log(arrOfBold);
                         var indexMissing = 0;
                         for (var j = 0; j < arrOfBold.length; j += 2) {
                             modalLabel.addFontWeight("bold", arrOfBold[j] - indexMissing);
