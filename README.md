@@ -47,6 +47,7 @@ Phaser.io Modals creator script
 	```
 		content: "The white {behind} me\n{is} a {[Phaser.Graphic]}"
 	```
+	
 	(Add text that you want bold into <strong>{}</strong> )</li>
 </ul>
 
