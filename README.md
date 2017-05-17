@@ -42,7 +42,12 @@ Phaser.io Modals creator script
 	<li><strong>y</strong> | The position of the element on the y axis (default = 0)</li>
 	<li><strong>frame</strong> | If this Sprite is using part of a sprite sheet or texture atlas you
 	    can specify the exact frame to use by giving a string or numeric index. </li>
-	<li>To make part of text **BOLD** include it like this: `content: "The white {behind} me\n{is} a {[Phaser.Graphic]}"` (Add text that you want bold into `{}` )</li>
+	<li>To make part of text <strong>BOLD</strong> include it like this: 
+	
+	```
+		content: "The white {behind} me\n{is} a {[Phaser.Graphic]}"
+	```
+	(Add text that you want bold into <strong>{}</strong> )</li>
 </ul>
 
 <strong>Available functions</strong>
