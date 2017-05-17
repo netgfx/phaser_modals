@@ -66,14 +66,14 @@ gameModal = function(game) {
             }
 
             if (modalBackgroundCallback) {
-                var innerModal = game.add.sprite(0, 0);
-                innerModal.inputEnabled = true;
-                innerModal.width = game.width;
-                innerModal.height = game.height;
-                innerModal.type = type;
-                innerModal.input.priorityID = 0;
+                var _innerModal = game.add.sprite(0, 0);
+                _innerModal.inputEnabled = true;
+                _innerModal.width = game.width;
+                _innerModal.height = game.height;
+                _innerModal.type = type;
+                _innerModal.input.priorityID = 0;
 
-                modalGroup.add(innerModal);
+                modalGroup.add(_innerModal);
             }
 
             if (includeBackground) {
@@ -209,7 +209,7 @@ gameModal = function(game) {
 
                 modalLabel["_offsetX"] = 0;
                 modalLabel["_offsetY"] = 0;
-                modalLabel["lockPosition"] = lockPosition;
+                modalLabel.lockPosition = lockPosition;
                 modalLabel._offsetX = offsetX;
                 modalLabel._offsetY = offsetY;
 
