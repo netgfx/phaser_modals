@@ -1,6 +1,11 @@
-# phaser_modals
+# Phaser_Modals
 Phaser.io Modals creator script
 
+## Live Example: http://codepen.io/netgfx/pen/bNLgaX
+
+### Tutorial blog post: http://nightlycoding.com/index.php/2015/02/phaser-io-modal-creator/
+
+### API
 <strong>General Options:</strong>
 
 <ul>
@@ -63,7 +68,6 @@ To make part of text **BOLD** include it like this:
 </ul>
 
 <hr>
-To view an example and tutorial visit my blog post: http://nightlycoding.com/index.php/2015/02/phaser-io-modal-creator/
 
 Note: Currently there is a bug on Phaser < 2.4.4 with WebGL using the last texture used if an empty sprite is created, in order to fix this you can add: ``` innerModal.texture.baseTexture.skipRender = false; ```
 <br>Issue: https://github.com/photonstorm/phaser/issues/2176
