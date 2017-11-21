@@ -1,7 +1,7 @@
 # Phaser_Modals
 Phaser.io Modals creator script
 
-## Live Example: http://codepen.io/netgfx/pen/bNLgaX
+## Live Example: https://codepen.io/7linternational/pen/eeMNMm/
 
 ### Tutorial blog post: http://nightlycoding.com/wordpress/phaser-io-modal-creator/
 
