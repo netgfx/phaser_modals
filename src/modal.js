@@ -184,10 +184,10 @@ gameModal = function(game) {
                         modalLabel = game.add.sprite(0, 0, atlasParent, content);
                     }else{
                         modalLabel = game.add.sprite(0,0,content);
+                        modalLabel.frame = imageFrame;
                     }
                     modalLabel.scale.setTo(contentScale, contentScale);
                     modalLabel.contentType = 'sprite';
-                    modalLabel.frame = imageFrame;
                     modalLabel.x = (centerX - ((modalLabel.width) / 2)) + offsetX;
                     modalLabel.y = (centerY - ((modalLabel.height) / 2)) + offsetY;
                 } else if (itemType === "button") {
