@@ -1,8 +1,6 @@
 var gameModal = gameModal || {};
 
-
 gameModal = function(game) {
-
     var _this = this;
     game.modals = {};
 
@@ -98,7 +96,7 @@ gameModal = function(game) {
                 var centerY = game.height / 2;
                 var callback = item.callback || false;
                 var textAlign = item.textAlign || "left";
-                var atlasParent = item.atlasParent || "";
+                var atlasParent = item.atlasParent || null;
                 var buttonHover = item.buttonHover || content;
                 var buttonActive = item.buttonActive || content;
                 var graphicColor = item.graphicColor || 0xffffff;
@@ -181,7 +179,13 @@ gameModal = function(game) {
                     modalLabel.angle = itemAngle;
                     modalLabel.contentType = 'tileSprite';
                 } else if (itemType === "sprite") {
-                    modalLabel = game.add.sprite(0, 0, atlasParent, content);
+
+                    if(atlasParent){
+                        modalLabel = game.add.sprite(0, 0, atlasParent, content);
+                    }else{
+                        modalLabel = game.add.sprite(0,0,content);
+                        modalLabel.frame = imageFrame;
+                    }
                     modalLabel.scale.setTo(contentScale, contentScale);
                     modalLabel.contentType = 'sprite';
                     modalLabel.x = (centerX - ((modalLabel.width) / 2)) + offsetX;
@@ -264,6 +268,10 @@ gameModal = function(game) {
                 }
             } else if (item.contentType === "image") {
                 item.loadTexture(value);
+            }
+            
+             else if (item.contentType === "sprite") {
+                item.frame = value;
             }
 
         },

@@ -64,7 +64,7 @@ To make part of text **BOLD** include it like this:
 	<li><strong>hideModal</strong> | The function to hide a previously created and shown modal, takes the modal name/type as an argument</li>
 	<li><strong>getModalItem</strong> | The function to get an element from a previously created modal, takes the modal name/type and the position of the element (index) as an argument</li>
 	<li><strong>destroyModal</strong> | Remove a previously created modal from the registry</li>
-	<li><strong>updateModalValue</strong> | Dynamically change the value of an element inside a modal, takes the modal name/type, the changed value, and the index of the element as arguments (experimental function)</li>
+	<li><strong>updateModalValue</strong> | Dynamically change the value of an element inside a modal,takes respectively: the new value, the modal name/type, and the index of the element as arguments (experimental function)</li>
 </ul>
 
 <hr>
