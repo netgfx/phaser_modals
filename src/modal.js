@@ -209,8 +209,17 @@ gameModal = function(game) {
                     modalLabel.endFill();
                     modalLabel.x = (centerX - ((modalLabel.width) / 2)) + offsetX;
                     modalLabel.y = (centerY - ((modalLabel.height) / 2)) + offsetY;
-                }
 
+                }else if (itemType === "video") {
+                    var video = game.add.video(content);
+                    video.play(true);
+                    modalLabel = game.add.sprite(0,0, video);
+                    modalLabel.scale.setTo(contentScale, contentScale);
+                    modalLabel.contentType = 'video';
+                    modalLabel.x = (centerX - ((modalLabel.width) / 2)) + offsetX;
+                    modalLabel.y = (centerY - ((modalLabel.height) / 2)) + offsetY;
+                }
+                
                 modalLabel["_offsetX"] = 0;
                 modalLabel["_offsetY"] = 0;
                 modalLabel.lockPosition = lockPosition;
@@ -269,7 +278,6 @@ gameModal = function(game) {
             } else if (item.contentType === "image") {
                 item.loadTexture(value);
             }
-            
              else if (item.contentType === "sprite") {
                 item.frame = value;
             }
