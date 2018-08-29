@@ -374,8 +374,6 @@ gameModal = function(game) {
                 setTimeout(function(){
                     modal.visible = false;
                 },animationDelay + 40);
-            }else{ //else just make it invisible without wait
-                modal.visible = false;
             }
         },
         destroyModal: function(type) {
