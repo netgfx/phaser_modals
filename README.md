@@ -31,6 +31,8 @@ Phaser.io Modals creator script
 
 <li><strong>modalCloseOnInput:</strong> If we want the modal to close when we click on the background (default off)</li>
 
+<li><strong>animation:</strong>If you want the modal make a animation when show and hide, you can choose between'fade' and 'scale'. (the default is off, just making it visible and invisible without animations). Note: If modal pauses the game, you need to pause the game BEFORE call the show function, else the animation will broken and the modal will not be showed.</li>
+
 </ul>
 
   

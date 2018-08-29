@@ -27,9 +27,11 @@ gameModal = function(game) {
             var hCenter = options.hCenter || true;
             var itemsArr = options.itemsArr || [];
             var fixedToCamera = options.fixedToCamera || false;
+            var animation = options.animation || false;
 
             var modal;
             var modalGroup = game.add.group();
+
             if (fixedToCamera === true) {
                 modalGroup.fixedToCamera = true;
                 modalGroup.cameraOffset.x = 0;
@@ -61,6 +63,12 @@ gameModal = function(game) {
 
                     modalBackgroundCallback = true;
                 }
+            }
+
+            if(animation){
+                modalGroup.animation = animation;
+            }else{
+                modalGroup.animation = false;
             }
 
             if (modalBackgroundCallback) {
@@ -287,28 +295,88 @@ gameModal = function(game) {
             return game.modals[type].getChildAt(index);
         },
         showModal: function(type) {
-            game.world.bringToTop(game.modals[type]);
-            game.modals[type].visible = true;
+            var modal = game.modals[type]; //save the current modal (just for work faster)
+            game.world.bringToTop(modal);
+            modal.visible = true;
+            
             //if there is a video label, start it
-                for(x = 0; x <= game.modals[type].length -1 ; x++){
-                    var e = game.modals[type].getChildAt(x)
+            for(x = 0; x <= modal.length -1 ; x++){
+                var e = modal.getChildAt(x)
                     if(e.contentType == 'video'){
                         e.video.play(true);
-                    }
                 }
-            // you can add animation here
+            }
+
+             // if the game is paused the animations dont work, so we'll test and manipulate it to make the animation and after, pause back. its easier than create other timer.
+             var paused = game.paused;
+             if(paused){
+                 game.paused = false;
+             }
+             // default animations here, you can add more
+             var animationDelay = 200;
+             switch(modal.animation){
+                case 'fade':
+                    modal.alpha = 0;
+                    game.add.tween(modal).to({
+                        alpha: 1
+                    }, animationDelay, Phaser.Easing.Linear.None, true, 0);
+                    break;
+
+                case 'scale':
+                    modal.scale.setTo(0,0);
+                    game.add.tween(modal.scale).to({
+                        x: 1,
+                        y: 1
+                    }, animationDelay, Phaser.Easing.Linear.None, true, 0);
+                    break;
+            }
+
+            setTimeout(function(){
+                if(paused){ //if the game was paused we'll pause it back when the animation over
+                    game.paused = true;
+                } 
+            },animationDelay + 20);
+
         },
         hideModal: function(type) {
-            game.modals[type].visible = false;
-            //if there is a video label, stop it
-            for(x = 0; x <= game.modals[type].length -1 ; x++){
-                var e = game.modals[type].getChildAt(x)
+            var modal = game.modals[type]; //save the current modal (just for work faster)
+
+             //if there is a video label, stop it
+             for(x = 0; x <= modal.length -1 ; x++){
+                var e = modal.getChildAt(x)
                 if(e.contentType == 'video'){
                     e.video.stop(true);
                 }
             }
 
-            // you can add animation here
+            // default animations here, you can add more
+            var animationDelay = 200;
+            switch(modal.animation){
+                case 'fade':
+                    game.add.tween(modal).to({
+                        alpha: 0
+                    }, animationDelay, Phaser.Easing.Linear.None, true, 0);
+                    break;
+
+                case 'scale':
+                    game.add.tween(modal.scale).to({
+                        x: 0,
+                        y: 0
+                    }, animationDelay, Phaser.Easing.Linear.None, true, 0);
+                    break;
+
+                default: // if default will just make invisible
+                    modal.visible = false;
+                    break; 
+            }
+
+            if(modal.animation){ //if animating, wait the animation over to hide
+                setTimeout(function(){
+                    modal.visible = false;
+                },animationDelay + 40);
+            }else{ //else just make it invisible without wait
+                modal.visible = false;
+            }
         },
         destroyModal: function(type) {
             game.modals[type].destroy();
