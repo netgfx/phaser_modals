@@ -212,8 +212,8 @@ gameModal = function(game) {
 
                 }else if (itemType === "video") {
                     var video = game.add.video(content);
-                    video.play(true);
                     modalLabel = game.add.sprite(0,0, video);
+                    modalLabel.video = video;
                     modalLabel.scale.setTo(contentScale, contentScale);
                     modalLabel.contentType = 'video';
                     modalLabel.x = (centerX - ((modalLabel.width) / 2)) + offsetX;
@@ -289,10 +289,25 @@ gameModal = function(game) {
         showModal: function(type) {
             game.world.bringToTop(game.modals[type]);
             game.modals[type].visible = true;
+            //if there is a video label, start it
+                for(x = 0; x <= game.modals[type].length -1 ; x++){
+                    var e = game.modals[type].getChildAt(x)
+                    if(e.contentType == 'video'){
+                        e.video.play(true);
+                    }
+                }
             // you can add animation here
         },
         hideModal: function(type) {
             game.modals[type].visible = false;
+            //if there is a video label, stop it
+            for(x = 0; x <= game.modals[type].length -1 ; x++){
+                var e = game.modals[type].getChildAt(x)
+                if(e.contentType == 'video'){
+                    e.video.stop(true);
+                }
+            }
+
             // you can add animation here
         },
         destroyModal: function(type) {
