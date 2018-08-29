@@ -145,7 +145,7 @@ content: "The white {behind} me\n{is} a {[Phaser.Graphic]}"
 
 Note: Currently there is a bug on Phaser < 2.4.4 with WebGL using the last texture used if an empty sprite is created, in order to fix this you can add: ``` innerModal.texture.baseTexture.skipRender = false; ```
 
-Note: Videos will loop while the modal is open. All videos will play on the event show and stop on the event hide. I'm working on a play button.
+Note for Videos: Videos will loop while the modal is open. All videos will play on the event show and stop on the event hide. I'm working on a play button. For update it with updateModalValue, you need to pass the src of the video as value on the function, for example: 'assets/video/video1.mp4'.
 
 <br>Issue: https://github.com/photonstorm/phaser/issues/2176
 

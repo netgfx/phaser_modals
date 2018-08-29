@@ -288,6 +288,9 @@ gameModal = function(game) {
             }
              else if (item.contentType === "sprite") {
                 item.frame = value;
+            }else if (item.contentType == 'video'){
+                item.video.changeSource(value);
+                item.video.loop = true;
             }
 
         },
