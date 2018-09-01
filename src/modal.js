@@ -299,6 +299,8 @@ gameModal = function(game) {
         },
         showModal: function(type) {
             var modal = game.modals[type]; //save the current modal (just for work faster)
+            
+            modal.x = game.camera.x; //world bounds game camera fix
             game.world.bringToTop(modal);
             modal.visible = true;
             
