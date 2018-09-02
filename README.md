@@ -53,6 +53,10 @@ Phaser.io Modals creator script
 
 <li><strong>align</strong> | The alignment of the text (center, left, right and text only)</li>
 
+<li><strong>lineSpacing</strong> | The Line Spacing of the text (number, text only)</li>
+
+<li><strong>maxWidth</strong> | The Max Width of the text, used to line break (number, text/bitmapText)</li>
+
 <li><strong>offsetX</strong> | The offset on x-axis of the element from the center of the game (0 is dead center)</li>  <li><strong>offsetY</strong> | The offset on y-axis of the element from the center of the game (0 is dead center)</li>  <li><strong>contentScale</strong> | The scaling to apply to the element (1 is no scale, default = 1)</li>
 
 <li><strong>stroke</strong> | The stroke color to apply to the text (default = 0x000000)</li>

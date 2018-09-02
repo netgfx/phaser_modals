@@ -93,6 +93,8 @@ gameModal = function(game) {
                 var itemColor = item.color || 0x000000;
                 var itemFontfamily = item.fontFamily || 'Arial';
                 var itemFontSize = item.fontSize || 32;
+                var itemMaxWidth = item.maxWidth || false;
+                var itemLineSpacing = item.lineSpacing || false;
                 var itemStroke = item.stroke || '0x000000';
                 var itemStrokeThickness = item.strokeThickness || 0;
                 var itemAlign = item.align || 'center';
@@ -162,6 +164,16 @@ gameModal = function(game) {
                             modalLabel.addFontWeight("normal", arrOfBold[j + 1] - indexMissing);
                             indexMissing += 2;
                         }
+
+                        if(itemMaxWidth){
+                            modalLabel.wordWrap = true;
+                            modalLabel.wordWrapWidth = itemMaxWidth;
+                        }
+
+                        if(itemLineSpacing){
+                            modalLabel.lineSpacing = itemLineSpacing;
+                        }
+
                         modalLabel.x = ((game.width / 2) - (modalLabel.width / 2)) + offsetX;
                         modalLabel.y = ((game.height / 2) - (modalLabel.height / 2)) + offsetY;
                     } else {
@@ -169,6 +181,11 @@ gameModal = function(game) {
                         modalLabel.contentType = 'bitmapText';
                         modalLabel.align = textAlign;
                         modalLabel.updateText();
+                        
+                        if(itemMaxWidth){
+                            modalLabel.maxWidth = itemMaxWidth;
+                        }
+
                         modalLabel.x = (centerX - (modalLabel.width / 2)) + offsetX;
                         modalLabel.y = (centerY - (modalLabel.height / 2)) + offsetY;
                     }
