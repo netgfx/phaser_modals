@@ -27,9 +27,11 @@ gameModal = function(game) {
             var hCenter = options.hCenter || true;
             var itemsArr = options.itemsArr || [];
             var fixedToCamera = options.fixedToCamera || false;
+            var animation = options.animation || false;
 
             var modal;
             var modalGroup = game.add.group();
+
             if (fixedToCamera === true) {
                 modalGroup.fixedToCamera = true;
                 modalGroup.cameraOffset.x = 0;
@@ -63,6 +65,12 @@ gameModal = function(game) {
                 }
             }
 
+            if(animation){
+                modalGroup.animation = animation;
+            }else{
+                modalGroup.animation = false;
+            }
+
             if (modalBackgroundCallback) {
                 var _innerModal = game.add.sprite(0, 0);
                 _innerModal.inputEnabled = true;
@@ -85,6 +93,8 @@ gameModal = function(game) {
                 var itemColor = item.color || 0x000000;
                 var itemFontfamily = item.fontFamily || 'Arial';
                 var itemFontSize = item.fontSize || 32;
+                var itemMaxWidth = item.maxWidth || false;
+                var itemLineSpacing = item.lineSpacing || false;
                 var itemStroke = item.stroke || '0x000000';
                 var itemStrokeThickness = item.strokeThickness || 0;
                 var itemAlign = item.align || 'center';
@@ -154,6 +164,16 @@ gameModal = function(game) {
                             modalLabel.addFontWeight("normal", arrOfBold[j + 1] - indexMissing);
                             indexMissing += 2;
                         }
+
+                        if(itemMaxWidth){
+                            modalLabel.wordWrap = true;
+                            modalLabel.wordWrapWidth = itemMaxWidth;
+                        }
+
+                        if(itemLineSpacing){
+                            modalLabel.lineSpacing = itemLineSpacing;
+                        }
+
                         modalLabel.x = ((game.width / 2) - (modalLabel.width / 2)) + offsetX;
                         modalLabel.y = ((game.height / 2) - (modalLabel.height / 2)) + offsetY;
                     } else {
@@ -161,6 +181,11 @@ gameModal = function(game) {
                         modalLabel.contentType = 'bitmapText';
                         modalLabel.align = textAlign;
                         modalLabel.updateText();
+                        
+                        if(itemMaxWidth){
+                            modalLabel.maxWidth = itemMaxWidth;
+                        }
+
                         modalLabel.x = (centerX - (modalLabel.width / 2)) + offsetX;
                         modalLabel.y = (centerY - (modalLabel.height / 2)) + offsetY;
                     }
@@ -209,8 +234,17 @@ gameModal = function(game) {
                     modalLabel.endFill();
                     modalLabel.x = (centerX - ((modalLabel.width) / 2)) + offsetX;
                     modalLabel.y = (centerY - ((modalLabel.height) / 2)) + offsetY;
-                }
 
+                }else if (itemType === "video") {
+                    var video = game.add.video(content);
+                    modalLabel = game.add.sprite(0,0, video);
+                    modalLabel.video = video;
+                    modalLabel.scale.setTo(contentScale, contentScale);
+                    modalLabel.contentType = 'video';
+                    modalLabel.x = (centerX - ((modalLabel.width) / 2)) + offsetX;
+                    modalLabel.y = (centerY - ((modalLabel.height) / 2)) + offsetY;
+                }
+                
                 modalLabel["_offsetX"] = 0;
                 modalLabel["_offsetY"] = 0;
                 modalLabel.lockPosition = lockPosition;
@@ -269,9 +303,11 @@ gameModal = function(game) {
             } else if (item.contentType === "image") {
                 item.loadTexture(value);
             }
-            
              else if (item.contentType === "sprite") {
                 item.frame = value;
+            }else if (item.contentType == 'video'){
+                item.video.changeSource(value);
+                item.video.loop = true;
             }
 
         },
@@ -279,13 +315,90 @@ gameModal = function(game) {
             return game.modals[type].getChildAt(index);
         },
         showModal: function(type) {
-            game.world.bringToTop(game.modals[type]);
-            game.modals[type].visible = true;
-            // you can add animation here
+            var modal = game.modals[type]; //save the current modal (just for work faster)
+            
+            modal.x = game.camera.x; //world bounds game camera fix
+            modal.y = game.camera.y;
+
+            game.world.bringToTop(modal);
+            modal.visible = true;
+            
+            //if there is a video label, start it
+            for(x = 0; x <= modal.length -1 ; x++){
+                var e = modal.getChildAt(x)
+                    if(e.contentType == 'video'){
+                        e.video.play(true);
+                }
+            }
+
+             // if the game is paused the animations dont work, so we'll test and manipulate it to make the animation and after, pause back. its easier than create other timer.
+             var paused = game.paused;
+             if(paused){
+                 game.paused = false;
+             }
+             // default animations here, you can add more
+             var animationDelay = 200;
+             switch(modal.animation){
+                case 'fade':
+                    modal.alpha = 0;
+                    game.add.tween(modal).to({
+                        alpha: 1
+                    }, animationDelay, Phaser.Easing.Linear.None, true, 0);
+                    break;
+
+                case 'scale':
+                    modal.scale.setTo(0,0);
+                    game.add.tween(modal.scale).to({
+                        x: 1,
+                        y: 1
+                    }, animationDelay, Phaser.Easing.Linear.None, true, 0);
+                    break;
+            }
+
+            setTimeout(function(){
+                if(paused){ //if the game was paused we'll pause it back when the animation over
+                    game.paused = true;
+                } 
+            },animationDelay + 20);
+
         },
         hideModal: function(type) {
-            game.modals[type].visible = false;
-            // you can add animation here
+            var modal = game.modals[type]; //save the current modal (just for work faster)
+
+             //if there is a video label, stop it
+             for(x = 0; x <= modal.length -1 ; x++){
+                var e = modal.getChildAt(x)
+                if(e.contentType == 'video'){
+                    e.video.stop(true);
+                }
+            }
+
+            // default animations here, you can add more
+            var animationDelay = 200;
+            switch(modal.animation){
+                case 'fade':
+                    game.add.tween(modal).to({
+                        alpha: 0
+                    }, animationDelay, Phaser.Easing.Linear.None, true, 0);
+                    break;
+
+                case 'scale':
+                    game.add.tween(modal.scale).to({
+                        x: 0,
+                        y: 0
+                    }, animationDelay, Phaser.Easing.Linear.None, true, 0);
+                    break;
+
+                default: // if default will just make invisible
+                    modal.visible = false;
+                    break; 
+            }
+
+            if(modal.animation){ //if animating, wait the animation over to hide
+                setTimeout(function(){
+                    modal.visible = false;
+                },animationDelay + 40);
+            }
         },
         destroyModal: function(type) {
             game.modals[type].destroy();
